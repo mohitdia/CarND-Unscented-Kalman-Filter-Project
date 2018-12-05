@@ -293,8 +293,6 @@ void UKF::Prediction(double delta_t) {
     // state difference
     VectorXd x_diff = Xsig_pred_.col(i) - x_;
     //angle normalization
-    // while (x_diff(3)> M_PI) x_diff(3) -= 2.*M_PI;
-    // while (x_diff(3)<-M_PI) x_diff(3) += 2.*M_PI;
     x_diff = tools.NormalizeAngle(x_diff, 3);
 
     P_ = P_ + weights_(i) * x_diff * x_diff.transpose();
@@ -444,8 +442,6 @@ void UKF::UpdateRadar(MeasurementPackage meas_package) {
     VectorXd z_diff = Zsig.col(i) - z_pred;
 
     //angle normalization
-    // while (z_diff(1)> M_PI) z_diff(1) -= 2.*M_PI;
-    // while (z_diff(1)<-M_PI) z_diff(1) += 2.*M_PI;
     z_diff = tools.NormalizeAngle(z_diff, 1);
 
     S = S + weights_(i) * z_diff * z_diff.transpose();
@@ -468,15 +464,11 @@ void UKF::UpdateRadar(MeasurementPackage meas_package) {
     //residual
     VectorXd z_diff = Zsig.col(i) - z_pred;
     //angle normalization
-    // while (z_diff(1)> M_PI) z_diff(1) -= 2.*M_PI;
-    // while (z_diff(1)<-M_PI) z_diff(1) += 2.*M_PI;
     z_diff = tools.NormalizeAngle(z_diff, 1);
 
     // state difference
     VectorXd x_diff = Xsig_pred_.col(i) - x_;
     //angle normalization
-    // while (x_diff(3)> M_PI) x_diff(3) -= 2.*M_PI;
-    // while (x_diff(3)<-M_PI) x_diff(3) += 2.*M_PI;
     x_diff = tools.NormalizeAngle(x_diff, 3);
 
     Tc = Tc + weights_(i) * x_diff * z_diff.transpose();
@@ -489,8 +481,6 @@ void UKF::UpdateRadar(MeasurementPackage meas_package) {
   VectorXd z_diff = z - z_pred;
 
   //angle normalization
-  // while (z_diff(1)> M_PI) z_diff(1) -= 2.*M_PI;
-  // while (z_diff(1)<-M_PI) z_diff(1) += 2.*M_PI;
   z_diff = tools.NormalizeAngle(z_diff, 1);
 
   //calculate NIS
