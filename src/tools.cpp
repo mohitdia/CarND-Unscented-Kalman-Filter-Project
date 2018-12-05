@@ -9,6 +9,13 @@ Tools::Tools() {}
 
 Tools::~Tools() {}
 
+VectorXd Tools::NormalizeAngle(VectorXd diffVector, int index) {
+  while (diffVector(index)> M_PI) diffVector(index) -= 2.*M_PI;
+  while (diffVector(index)<-M_PI) diffVector(index) += 2.*M_PI;
+
+  return diffVector;
+}
+
 VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
                               const vector<VectorXd> &ground_truth) {
   /**

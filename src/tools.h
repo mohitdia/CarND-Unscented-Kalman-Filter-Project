@@ -24,6 +24,11 @@ public:
   */
   VectorXd CalculateRMSE(const vector<VectorXd> &estimations, const vector<VectorXd> &ground_truth);
 
+  /**
+   * Normalizes the angle between -pi and pi
+   * Passes a vector and the value at the index to be normalized.
+   */
+  VectorXd NormalizeAngle(VectorXd diffVector, int index);
 };
 
 #endif /* TOOLS_H_ */
